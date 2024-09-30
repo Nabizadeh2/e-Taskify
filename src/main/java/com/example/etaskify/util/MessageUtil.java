@@ -14,7 +14,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class Message {
+public class MessageUtil {
 
     private final MessageSource messageSource;
 
