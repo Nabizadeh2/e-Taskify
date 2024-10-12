@@ -36,7 +36,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class OrganizationService implements OrganizationServiceImpl {
-
     private final OrganizationMapper organizationMapper;
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
@@ -68,7 +67,7 @@ public class OrganizationService implements OrganizationServiceImpl {
 
         emailService.sendTo(userEntity.getEmail(),subject);
 
-        return ResponseEntity.ok(MessageResponse.of(messageUtil.getMessage("MESSAGE_SEND_TO_EMAIL", ));
+        return ResponseEntity.ok(MessageResponse.of(messageUtil.getMessage("MESSAGE_SEND_TO_EMAIL","ROLE_ADMIN"),HttpStatus.NOT_FOUND));
     }
 
     @Override

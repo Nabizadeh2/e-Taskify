@@ -1,6 +1,7 @@
 package com.example.etaskify.service;
 
 import ch.qos.logback.core.subst.Token;
+import com.example.etaskify.entity.TokenEntity;
 import com.example.etaskify.entity.UserEntity;
 import com.example.etaskify.enums.TokenType;
 import com.example.etaskify.repository.TokenRepository;
@@ -15,9 +16,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TokenService implements TokenServiceImpl {
     private final TokenRepository tokenRepository;
-   // @Value("${app.time.token.confirmation}")
+    //@Value("${app.time.token.confirmation}")
     private long confirmationTime;
-   // @Value("${app.time.token.refresh}")
+    //@Value("${app.time.token.refresh}")
     private long refreshTime;
 
 
@@ -28,8 +29,8 @@ public class TokenService implements TokenServiceImpl {
             token.update(refreshToken,refreshTime);
             tokenRepository.save(token);
         },() -> {
-            Token token = new Token(confirmationTime, refreshToken, TokenType.REFRESH, userEntity);
-            tokenRepository.save(token);
+            TokenEntity tokenEntity = new TokenEntity(confirmationTime, refreshToken, TokenType.REFRESH, userEntity);
+            tokenRepository.save(tokenEntity);
         });
         return refreshToken;
     }
@@ -42,8 +43,8 @@ public class TokenService implements TokenServiceImpl {
             token.update(confirmationToken, confirmationTime);
             tokenRepository.save(token);
         }, () -> {
-            Token token = new Token(confirmationTime, confirmationToken, TokenType.CONFIRMATION, userEntity);
-            tokenRepository.save(token);
+            TokenEntity tokenEntity = new TokenEntity(confirmationTime, confirmationToken, TokenType.CONFIRMATION, userEntity);
+            tokenRepository.save(tokenEntity);
         });
 
         return confirmationToken;
